@@ -87,7 +87,7 @@ maintainable, and extensible software framework.
 
 The name **BEAST** now stands for:
 
-**Battery Estimation Algorithms and Simulation Toolkit**
+**Battery Estimation Algorithms Simulation Toolkit**
 
 The emphasis on *Algorithms* reflects the central purpose of the project:
 developing, studying, implementing, and comparing algorithms for battery state
@@ -119,15 +119,16 @@ environment.
 
 They share the same conceptual foundation:
 
-```text
-Battery model
-     +
-Measurements
-     +
-Estimation algorithm
-     |
-     v
-Estimated battery states and parameters
+```mermaid
+flowchart TB
+    BatteryModel["Battery Model"]
+    Measurements["Measurements"]
+    EstimationAlgorithm["Estimation Algorithm"]
+    Estimated["Estimated Battery States and Parameters"]
+
+    BatteryModel --> EstimationAlgorithm
+    Measurements --> EstimationAlgorithm
+    EstimationAlgorithm --> Estimated
 ```
 
 Maintaining independent implementations also makes it possible to
