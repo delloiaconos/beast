@@ -1,4 +1,4 @@
-# BEAST — Battery Estimation Algorithms and Simulation Toolkit
+# BEAST — Battery Estimation Algorithms Simulation Toolkit
 
 ![BEAST Logo](assets/beast-logo.png)
 
@@ -53,17 +53,16 @@ different compatible models.
 
 At a conceptual level:
 
-```text
-                  +------------------+
-measurements ---->|                  |
-inputs ---------->|    Estimator     |----> estimated states / parameters
-                  |                  |
-                  +--------+---------+
-                           |
-                           v
-                  +------------------+
-                  |    Cell Model    |
-                  +------------------+
+```mermaid
+flowchart TB
+    Estimator["Estimator"]
+    CellModel["Cell Model"]
+
+    Measurements["measurements"] -->|yExp| Estimator
+    Inputs["inputs"] -->|u| Estimator
+
+    Estimator -->|yNew, xEst, pEst| Outputs["Estimated: / outputs, states and parameters."]
+    CellModel --> Estimator
 ```
 
 Each language-specific repository implements this architecture using the
@@ -190,10 +189,7 @@ The original research was conducted at the **Università degli Studi di Salerno*
 
 The foundational thesis is:
 ```
-    Salvatore Dello Iacono, Hardware/Software Co-Design di uno stimatore dello stato di batterie 
-    agli ioni di litio, 
-    Bachelor's Degree Thesis in Electronic Engineering, Università degli Studi di Salerno, 
-    academic year 2012–2013.
+Salvatore Dello Iacono, "Hardware/Software Co-Design di uno stimatore dello stato di batterie agli ioni di litio," Bachelor's Degree Thesis in Electronic Engineering, Università degli Studi di Salerno, academic year 2012–2013.
 ```
 Bachelor's thesis supervision:
 
