@@ -9,11 +9,9 @@ LATEXMK  := latexmk
 
 figures: $(PDF_FILES)
 
-$(AUX_DIR):
-	mkdir -p $(AUX_DIR)
-
-$(OUT_DIR): 
-	mkdir -p $(OUT_DIR)
+$(AUX_DIR) $(OUT_DIR):
+	@echo "Creating '$@' directory..."
+	@mkdir -p $@
 
 $(OUT_DIR)/%.pdf: figures/%.tex | $(AUX_DIR) $(OUT_DIR)
 	$(LATEXMK) \
