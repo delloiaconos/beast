@@ -54,16 +54,27 @@ different compatible models.
 At a conceptual level:
 
 ```mermaid
-flowchart TB
-    Estimator["Estimator"]
-    CellModel["Cell Model"]
+flowchart LR
 
-    Measurements["measurements"] -->|yExp| Estimator
-    Inputs["inputs"] -->|u| Estimator
+    Measurements["Measurements"]
+    Inputs["Inputs"]
 
-    Estimator -->|yNew, xEst, pEst| Outputs["Estimated: / outputs, states and parameters."]
-    CellModel --> Estimator
+    subgraph Simulation["Simulation"]
+        direction LR
+        CellModel["Cell Model"] -->|y| Estimator["Estimator"]
+        Estimator -->|x,p,u| CellModel 
+    end
+
+    Outputs["Estimated\noutputs"]
+
+    Measurements -->|yExp| Estimator
+    Inputs -->|u| Estimator
+    Estimator -->|yNew, xEst, pEst| Outputs
+
+    Measurements ~~~ Inputs
+    CellModel ~~~ Estimator
 ```
+
 
 Each language-specific repository implements this architecture using the
 conventions and facilities appropriate to that language.
