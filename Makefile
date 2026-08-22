@@ -1,19 +1,27 @@
-BUILD_DIR := .build
+AUX_DIR   := .aux
+OUT_DIR   := outputs
 TEX_FILES := $(wildcard figures/*.tex)
-PDF_FILES := $(patsubst %.tex,$(BUILD_DIR)/%.pdf,$(TEX_FILES))
+PDF_FILES := $(patsubst %.tex,$(OUT_DIR)/%.pdf,$(notdir $(TEX_FILES))) 
 
-PDFLATEX  := pdflatex
+LATEXMK  := latexmk
 
 .PHONY: figures clean
 
 figures: $(PDF_FILES)
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+$(AUX_DIR):
+	mkdir -p $(AUX_DIR)
 
-$(BUILD_DIR)/%.pdf: %.tex | $(BUILD_DIR)
-	$(PDFLATEX) \
+$(OUT_DIR): 
+	mkdir -p $(OUT_DIR)
+
+$(OUT_DIR)/%.pdf: figures/%.tex | $(AUX_DIR) $(OUT_DIR)
+	$(LATEXMK) \
 		-interaction=nonstopmode \
 		-halt-on-error \
-		-output-directory=$(BUILD_DIR) \
+		-auxdir=$(AUX_DIR) \
+		-outdir=$(OUT_DIR) \
 		$<
+		
+clean:
+	rm -rf $(AUX_DIR) $(OUT_DIR)
