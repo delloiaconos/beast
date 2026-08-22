@@ -1,0 +1,45 @@
+@startuml
+
+title BEAST - Estimator Architecture
+
+left to right direction
+hide empty members
+hide circle
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam monochrome true
+skinparam packageStyle rectangle
+
+package "cell_models" {
+    abstract class CellModel
+}
+
+package "estimators" {
+    abstract class Estimator {
+        - cell : CellModel
+        + Estimator( cell : CellModel )
+        {abstract} + initialize( x0 : Vector, p0 : Vector, u : Vector, yXP : Vector, t : float ) : float
+        {abstract} + step( x : Vector, p : Vector, u : Vector, yXP : Vector, t : float ) : float
+        + getX()    : Vector
+        + getP()    : Vector
+        + getLx()   : Vector <<optional>>
+        + getLp()   : Vector <<optional>>
+        + name()    : String <<optional>>
+    }
+
+    class "Estimator implementations" as EstimatorImpl <<concrete>>
+
+    Estimator <|-- EstimatorImpl
+}
+
+class EstimatorFactory <<factory>> {
+    + create(name)  : Estimator
+    + list()        : List<String>
+}
+
+Estimator --> CellModel : uses
+EstimatorFactory ..> Estimator : returns
+EstimatorFactory ..> EstimatorImpl : instantiates
+
+@enduml

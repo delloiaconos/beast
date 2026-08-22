@@ -1,0 +1,27 @@
+@startuml
+
+title BEAST - Battery Estimation Algorithms and Simulation Toolkit
+
+left to right direction
+
+hide empty members
+hide circle
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam monochrome true
+skinparam packageStyle rectangle
+
+!include cell_models.puml
+!include estimators.puml
+
+
+Estimator --> CellModel : uses
+
+CellFactory ..> CellModel : returns
+CellFactory ..> CellModelImpl : instantiates
+
+EstimatorFactory ..> Estimator : returns
+EstimatorFactory ..> EstimatorImpl : instantiates
+
+@enduml

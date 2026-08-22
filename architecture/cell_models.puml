@@ -1,0 +1,43 @@
+@startuml
+
+title BEAST - Cell Model Architecture
+
+left to right direction
+hide empty members
+hide circle
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam monochrome true
+skinparam packageStyle rectangle
+
+package "cell_models" {
+    abstract class CellModel {
+        + initialize()
+        {abstract} + f0(x : Vector, p : Vector, u : Vector, dt : float ) : Vector
+        {abstract} + g0(x : Vector, p : Vector, u : Vector, dt : float ) : Vector
+        {abstract} + f1x(x : Vector, p : Vector, u : Vector, dt : float ) : Matrix
+        {abstract} + f1p(x : Vector, p : Vector, u : Vector, dt : float ) : Matrix
+        {abstract} + g1x(x : Vector, p : Vector, u : Vector, dt : float ) : Matrix
+        {abstract} + g1p(x : Vector, p : Vector, u : Vector, dt : float ) : Matrix
+        {abstract} + coerceState( x : Vector ) : Vector
+        {abstract} + coerceParameters( p : Vector ) : Vector
+        + name()        : String <<optional>>
+        + parameters()  : List<String> <<optional>>
+        + states()      : List<String> <<optional>>
+    }
+
+    class "CellModel implementations" as CellModelImpl <<concrete>>
+
+    CellModel <|-- CellModelImpl
+}
+
+class CellModelFactory <<factory>> {
+    + create(name)  : CellModel
+    + list()        : List<String>
+}
+
+CellModelFactory ..> CellModel : returns
+CellModelFactory ..> CellModelImpl : instantiates
+
+@enduml
