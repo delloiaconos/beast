@@ -5,10 +5,8 @@
 \usepackage[siunitx]{circuitikz}
 
 \begin{document} 
-
-	\resizebox {\columnwidth} {!} { 
 	\begin{tikzpicture}[remember picture, european voltages, american currents]	
-		\ ctikzset { bipoles/capacitor/voltage/ distance from node=10}
+		\ctikzset{voltage/distance from node=10}
 		\draw 
 		
 		% SoC
@@ -48,6 +46,4 @@
 	    (14,0) to[open, v>=$v_{Cell}$] (14,2)
 
 	;\end{tikzpicture}
-	}
-
 \end{document}
