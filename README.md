@@ -30,28 +30,14 @@ differ between repositories.
 
 ## Project history
 
-BEAST originates from work developed for the Bachelor's Degree Thesis in
-Electronic Engineering:
+## Project history
 
-> **Hardware/Software Co-Design di uno stimatore dello stato di batterie agli ioni di litio**  
-> Salvatore Dello Iacono, Università degli Studi di Salerno, academic year
-> 2012–2013.
+BEAST originated from academic research on lithium-ion battery modelling and
+state estimation and has since evolved into a multi-language toolkit for
+battery estimation algorithms and simulation.
 
-The work continued through undergraduate research activities on battery modelling, state estimation, parameter estimation, and Battery Management Systems at the Università degli Studi di Salerno.
-
-The original research combined:
-
-- equivalent-circuit battery modelling;
-- State of Charge estimation;
-- battery-parameter estimation;
-- MATLAB modelling and simulation;
-- C++ implementations;
-- real-time execution on an FPGA-based Nios II embedded platform.
-
-The modern BEAST project reorganizes and extends that work as a set of
-maintainable software repositories. The MATLAB code documents the historical
-lineage of the project, while the C++ and Python implementations provide modern
-platforms for continued development, testing, simulation, and experimentation.
+See [HISTORY.md](HISTORY.md) for the complete project history, its academic
+origins, and the evolution of the MATLAB, and C++ implementations.
 
 ## Architecture
 
@@ -200,7 +186,7 @@ the modifications and cite the original project.
 
 ## Acknowledgements
 
-The original research was conducted at the Università degli Studi di Salerno.
+The original research was conducted at the **Università degli Studi di Salerno**.
 
 The foundational thesis is:
 ```
