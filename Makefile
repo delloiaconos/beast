@@ -18,6 +18,8 @@ $(AUX_DIR) $(OUT_DIR):
 	@mkdir -p $@
 
 $(OUT_DIR)/%.pdf: figures/%.tex | $(AUX_DIR) $(OUT_DIR)
+	@command -v $(LATEXMK) >/dev/null 2>&1 || \
+		{ echo "Error: $(LATEXMK) not found."; exit 1; }
 	$(LATEXMK) \
 		-interaction=nonstopmode \
 		-halt-on-error \
@@ -26,6 +28,8 @@ $(OUT_DIR)/%.pdf: figures/%.tex | $(AUX_DIR) $(OUT_DIR)
 		$<
 
 $(OUT_DIR)/%.svg: $(OUT_DIR)/%.pdf | $(OUT_DIR)
+	@command -v $(PDFCAIRO) >/dev/null 2>&1 || \
+		{ echo "Error: $(PDFCAIRO) not found."; exit 1; }
 	$(PDFCAIRO) -svg $< $@
 
 clean:
