@@ -19,12 +19,12 @@
     \coordinate (left_top)    at ($(left_mid)+(0.0,0.5)$);
     \coordinate (left_bot)    at ($(left_mid)-(0.0,0.5)$);
 
-    \coordinate (right_mid)    at (8.0,2);
+    \coordinate (right_mid)    at (7.0,2);
     \coordinate (right_top)    at ($(right_mid)+(0.0,0.5)$);
     \coordinate (right_bot)    at ($(right_mid)-(0.0,0.5)$);
 
     \coordinate (out_p) at ($(right_mid)+(1.0,0.0)$);;
-    \coordinate (out_n) at (9.0,0.0);
+    \coordinate (out_n) at (8.0,0.0);
 
     \draw
         (voc_p) to[battery, l_=$V_{OC}$] (voc_n)
@@ -33,10 +33,10 @@
 
         (left_top) to[short] (left_bot)
 
-        (left_bot) to[D*] ($(left_bot)+(1.5,0.0)$) coordinate (diode_d)
+        (left_bot) to[D*=$D_d$] ($(left_bot)+(1.5,0.0)$) coordinate (diode_d)
         (diode_d) to[R=$R_d$] (right_bot)
 
-        ($(left_top)+(1.5,0.0)$) coordinate (diode_c) to[D*] (left_top)
+        (left_top) to[D*, invert, l=$D_c$]($(left_top)+(1.5,0.0)$) coordinate (diode_c) 
         (diode_c) to[R=$R_c$] (right_top)
 
         (right_top) to[short] (right_bot)
