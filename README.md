@@ -1,4 +1,4 @@
-# BEAST — Battery Estimation Algorithms Simulation Toolkit
+# BEAST — Battery Estimation Algorithms and Simulation Toolkit
 
 ![BEAST Logo](assets/beast-logo.png)
 
