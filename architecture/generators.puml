@@ -1,0 +1,57 @@
+@startuml
+
+title BEAST - Input/current generator architecture
+
+left to right direction
+hide empty members
+hide circle
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam monochrome true
+skinparam packageStyle rectangle
+
+package "beast-py: beast.generators" {
+    abstract class Generator {
+        - t_start : float
+        - t_stop : float
+        - delta_t : float
+        - Ng : int
+        + duration : float
+        + n_samples : int
+        {abstract} + generate_all(t_start, t_stop, delta_t)
+        {abstract} + generate_t(t)
+        + time_vector(n_samples, delta_t, t_start)
+        + t_all : Vector
+    }
+
+    class Generator_ConstantValue {
+        + generate() : (Vector, Vector)
+    }
+
+    class Generator_Pulse {
+        + n_high_samples : int
+        + n_low_samples : int
+        + generate() : (Vector, Vector)
+    }
+
+    Generator <|-- Generator_ConstantValue
+    Generator <|-- Generator_Pulse
+}
+
+package "beast-mat: beast.CurrentGenerators" {
+    class CurrentPWL <<function>>
+    class CurrentPulse <<function>>
+    class CurrentPulsed01 <<function>>
+}
+
+Generator_Pulse .. CurrentPulse : related pulse concept
+
+note bottom
+  The generator subsystems share a purpose but not a portable class contract.
+  Python uses stateful classes; MATLAB exposes independent functions.
+  CurrentPWL and CurrentPulsed01 have no direct Python counterparts;
+  Generator_ConstantValue has no direct MATLAB counterpart.
+end note
+
+@enduml

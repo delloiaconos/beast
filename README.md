@@ -79,6 +79,16 @@ flowchart LR
 Each language-specific repository implements this architecture using the
 conventions and facilities appropriate to that language.
 
+
+The directory `architecture` documents the architecture actually implemented as UML diagrams.
+The diagrams are:
+
+- `beast_classes.puml`: module-level view and dependencies;
+- `cell_models.puml`: shared cell-model contract, implementations, and factories;
+- `estimators.puml`: shared estimator lifecycle, implementations, and export metadata;
+- `generators.puml`: generator structures (which intentionally differ by language).
+
+
 ## Equivalent-circuit battery models
 
 BEAST primarily works with **equivalent-circuit models (ECMs)**. These models
