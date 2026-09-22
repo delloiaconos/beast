@@ -53,11 +53,13 @@ umls: $(UML_PDFS) $(UML_SVGS) | $(OUT_DIR)
 
 $(UML_PDFS): $(OUT_DIR)/%.pdf: architecture/%.puml | $(OUT_DIR)
 	$(call check-command,$(PLANTUML))
+	@echo "Generating $(OUT_DIR)/$(@F) from $<"
 	$(PLANTUML) -tpdf -o "$(abspath $(OUT_DIR))" $<
 
 
 $(UML_SVGS): $(OUT_DIR)/%.svg: architecture/%.puml | $(OUT_DIR)
 	$(call check-command,$(PLANTUML))
+	@echo "Generating $(OUT_DIR)/$(@F) from $<"
 	$(PLANTUML) -tsvg -o "$(abspath $(OUT_DIR))" $<
 
 clean:
