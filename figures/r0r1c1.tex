@@ -11,14 +11,14 @@
 		
 		% SoC
 		(0,0) to[C, l_=$Q_n$] (0,2)
-		(2,2) to[cI=$i_{Cell}$] (2,0) 
+		(2,0) to[cI_=$i_{Cell}$] (2,2) 
 	   	(0,0) to[short] (2,0)
 	   	(0,2) to[short] (2,2)
 	   	
 	   	(-0.5,0) to[open, v^>=$SoC$] (-0.5,2)
 		
 		% Controlled SoC
-		(5,0) to[american controlled voltage source, l_=$V_{OC}({ SoC, i_{Cell} })$] 
+		(5,0) to[american controlled voltage source, invert, l_=$V_{OC}({ SoC, i_{Cell} })$] 
 		(5,2) to[R=$R_0$] (8,2) 
 
 		% RC Loop 1
